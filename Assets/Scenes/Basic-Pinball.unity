@@ -348,6 +348,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper
@@ -1218,6 +1223,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper (3)
@@ -1385,6 +1395,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper (2)
@@ -1659,6 +1674,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper (6)
@@ -1732,6 +1752,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper (5)
@@ -2483,6 +2508,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper (4)
@@ -3639,6 +3669,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1030511452}
     m_Modifications:
+    - target: {fileID: -3383946573649586862, guid: 83a9f6978de8f4ed58b9e0d00a781d5d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a5778bd937cb4eed9ca310bb4ae2c9b, type: 3}
     - target: {fileID: 1162076593523988, guid: 83a9f6978de8f4ed58b9e0d00a781d5d, type: 3}
       propertyPath: m_Name
       value: Bumper (1)
