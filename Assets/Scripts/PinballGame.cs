@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 // Include the namespace required to use Unity UI
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class PinballGame : MonoBehaviour
     public Text highScoreText;
     public Text winText;
     public Text ballsText;
+    public Text timerText;
 
     public int maxBalls = 3;
     public int score = 0;
@@ -28,6 +30,8 @@ public class PinballGame : MonoBehaviour
 
 
     private int ballsLeft = 3;
+    private float allowed_time = 300;
+    float remaining;
     private bool gameOver = false;
     private GameObject ball;
     private GameObject plunger;
@@ -35,6 +39,7 @@ public class PinballGame : MonoBehaviour
 
     private GameObject maincam;
     private GameObject puzzleCamera;
+    private float startTime;
 
     // At the start of the game..
     void Start()
@@ -64,14 +69,28 @@ public class PinballGame : MonoBehaviour
         if (Input.GetKey(newGameKey) == true) NewGame();
         if (Input.GetKey(plungerKey) == true) Plunger();
         if (Input.GetKey(puzzlecameraKey) == true) switchCamera();
+        //Turn on the timer
+        if (ball.activeSelf == true) {
+            remaining =allowed_time - (Time.time - startTime);
+            string mins = ((int)remaining/60).ToString();
+            string secs = (remaining%60).ToString("f1");
+            timerText.text = mins + ":" + secs;            
+        }
+        else {
+            timerText.text = "00" + ":" + "00";            
+        }
 
         // detect ball going past flippers into "drain"
-        if ((ball.activeSelf == true) && (ball.transform.position.z < drain.transform.position.z))
+        if (((ball.activeSelf == true) && (ball.transform.position.z < drain.transform.position.z)))
         {
             ball.SetActive(false);
         }
+        else if (remaining < 0 && ball.activeSelf == true) {
+            ball.SetActive(false);
+        }
 
-        if ((ball.activeSelf == false) && (ballsLeft == 0))
+
+        if (((ball.activeSelf == false) && (ballsLeft == 0)))
         {
             if (gameOver == false)
             {
@@ -130,7 +149,7 @@ public class PinballGame : MonoBehaviour
         if ((ballsLeft > 0) && (ball.activeSelf == false))
         {
             ball.SetActive(true);
-
+            Debug.Log("Setting active");
             Rigidbody rb = ball.GetComponent<Rigidbody>();
             Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
             rb.AddForce(movement * plungerSpeed);
@@ -140,6 +159,7 @@ public class PinballGame : MonoBehaviour
             ballsLeft = ballsLeft - 1;
 
             audioPlayer.PlayOneShot(plungerClip);
+            startTime = Time.time;
         }
     }
 
