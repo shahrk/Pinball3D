@@ -30,7 +30,7 @@ public class PinballGame : MonoBehaviour
 
 
     private int ballsLeft = 3;
-    private float allowed_time = 300;
+    private float allowed_time = 30;
     float remaining;
     private bool gameOver = false;
     private GameObject ball;
@@ -118,8 +118,8 @@ public class PinballGame : MonoBehaviour
 
         // Check if our 'count' is equal to or exceeded 12
         if (gameOver) winText.text = "Game Over";
-        else if (score == 1500) winText.text = "Superstar!";
-        else if (score >= 2100) winText.text = "You won!";
+        else if (score == 500) winText.text = "Superstar!";
+        else if (score >= 900) winText.text = "You won!";
         else winText.text = "";
 
         if (score > highscore) highscore = score;
