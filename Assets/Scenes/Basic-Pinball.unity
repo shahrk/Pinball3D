@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 245131692}
   m_Layer: 0
   m_Name: Clock
-  m_TagString: Untagged
+  m_TagString: Clock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,7 +635,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75d43d889ec9144aaa9dd318a9d0fca7, type: 2}
+  - {fileID: 2100000, guid: 847ca6aa59bc941e29360481193736c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
