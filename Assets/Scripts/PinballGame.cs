@@ -31,6 +31,7 @@ public class PinballGame : MonoBehaviour
     public float remaining;
     public float bonus;
 
+    public bool isSuperstar = false;
     private int ballsLeft = 3;
     private float allowed_time = 30;
     private bool gameOver = false;
@@ -128,16 +129,26 @@ public class PinballGame : MonoBehaviour
             return;
         if (score >= 900) winText.text = "You won!";
         else if (gameOver) winText.text = "Game Over";
-        else if (score == 500) winText.text = "Superstar!";
-        else winText.text = "";
+        else if (!isSuperstar && score == 500) {
+            winText.text = "Superstar!";
+            isSuperstar = true;
+            StartCoroutine(resetWinText());
+        }
+        // else winText.text = "";
 
         if (score > highscore) highscore = score;
         highScoreText.text = highscore.ToString();
     }
 
+    System.Collections.IEnumerator resetWinText() {
+        yield return new WaitForSeconds(0.5F);
+        winText.text = "";
+    }
+
     void IsSuckedUp() {
         if (isBlackholeActive && isWithinEllipse(ball.transform.position.x, ball.transform.position.y, ball.transform.position.z)) {
             winText.text = "BLACK HOLED";
+            StartCoroutine(resetWinText());
             Vector3 initialPos = new Vector3(ball.transform.position.x, 0.0f, ball.transform.position.z);
             Vector3 finalPos = new Vector3(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z);
             ball.transform.position = initialPos;
@@ -224,6 +235,8 @@ public class PinballGame : MonoBehaviour
         gameOver = false;
         ball.SetActive(false);
         score = 0;
+        isSuperstar = false;
+        winText.text = "";
 
         GameObject[] bumpers;
         GameObject[] clocks;
