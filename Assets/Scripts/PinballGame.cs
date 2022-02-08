@@ -41,9 +41,10 @@ public class PinballGame : MonoBehaviour
     private GameObject maincam;
     private GameObject puzzleCamera;
     private float startTime;
+    private GameObject[] clocks;
 
     private bool isBlackholeActive = true;
-
+    public bool allow_once = true;
     // At the start of the game..
     void Start()
     {
@@ -80,7 +81,19 @@ public class PinballGame : MonoBehaviour
             string mins = ((int)remaining/60).ToString();
             string secs = ((remaining)%60).ToString("f1");
             timerText.text = mins + ":" + secs; 
-            bonus = 0;     
+            bonus = 0; 
+
+            if (remaining <= 10 && allow_once){
+
+                clocks = GameObject.FindGameObjectsWithTag("Clock");
+                foreach (GameObject clock in clocks){
+                    clock.GetComponent<MeshRenderer>().enabled = true;
+                    clock.GetComponent<BoxCollider>().enabled = true;
+                    clock.GetComponent<ClockController>().hitCount = 0;
+                
+                allow_once = false;
+        }
+            }    
         }
         else {
             timerText.text = "00" + ":" + "00";            
@@ -226,7 +239,6 @@ public class PinballGame : MonoBehaviour
         score = 0;
 
         GameObject[] bumpers;
-        GameObject[] clocks;
         bumpers = GameObject.FindGameObjectsWithTag("Bumper");
         clocks = GameObject.FindGameObjectsWithTag("Clock");
 
@@ -238,10 +250,11 @@ public class PinballGame : MonoBehaviour
         }
 
         foreach (GameObject clock in clocks){
-            clock.GetComponent<MeshRenderer>().enabled = true;
-            clock.GetComponent<BoxCollider>().enabled = true;
+            clock.GetComponent<MeshRenderer>().enabled = false;
+            clock.GetComponent<BoxCollider>().enabled = false;
             clock.GetComponent<ClockController>().hitCount = 0;
         }
+        allow_once = true;
     }
 
     void Plunger()
