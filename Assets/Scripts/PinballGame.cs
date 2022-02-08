@@ -89,7 +89,7 @@ public class PinballGame : MonoBehaviour
             string mins = ((int)remaining/60).ToString();
             string secs = ((remaining)%60).ToString("f1");
             timerText.text = mins + ":" + secs; 
-            bonus = 0; 
+            // bonus = 0;
 
             if (remaining <= 10 && allow_once){
 
