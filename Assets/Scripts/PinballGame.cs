@@ -172,27 +172,9 @@ public class PinballGame : MonoBehaviour
             Vector3 initialPos = new Vector3(ball.transform.position.x, 0.0f, ball.transform.position.z);
             Vector3 finalPos = new Vector3(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z);
             ball.transform.position = initialPos;
-            // ball.SetActive(false);
             isBlackholeActive = false;
             StartCoroutine(waiter());
-            // ball.SetActive(true);
-            // Rigidbody rb = ball.GetComponent<Rigidbody>();
-            // Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f));
-            // rb.AddForce(movement * plungerSpeed);
-            // ball.transform.position = finalPos;
         }
-        // ball.SetActive(true);
-        // Debug.Log("Setting active");
-        // Rigidbody rb = ball.GetComponent<Rigidbody>();
-        // Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
-        // rb.AddForce(movement * plungerSpeed);
-
-        // // set ball position to location of plunger
-        // ball.transform.position = plunger.transform.position;
-        // ballsLeft = ballsLeft - 1;
-
-        // audioPlayer.PlayOneShot(plungerClip);
-        // startTime = Time.time;
     }
 
     System.Collections.IEnumerator waiter()
@@ -201,18 +183,14 @@ public class PinballGame : MonoBehaviour
         if (isWithinEllipse1(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z)) {
             finalPos = new Vector3(6.05F, plunger.transform.position.y, 1.75F);
         } else {
-            finalPos = new Vector3(-6.275F, plunger.transform.position.y, -0.4F);
+            finalPos = new Vector3(-5.8F, plunger.transform.position.y, -0.4F);
         }
-        // ball.SetActive(false);
         ball.GetComponent<MeshRenderer>().enabled = false;
-        //Wait for 0.3 seconds
         yield return new WaitForSeconds(0.5F);
-        // toggleBlackholeWithDelay();
-        // ball.SetActive(true);
         ball.GetComponent<MeshRenderer>().enabled = true;
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 0.0f));
-        rb.AddForce(movement * plungerSpeed/2);
+        rb.AddForce(movement * plungerSpeed);
         ball.transform.position = finalPos;
         isBlackholeActive = true;
     }
@@ -241,9 +219,9 @@ public class PinballGame : MonoBehaviour
 
     bool isWithinEllipse2(float x, float y, float z) {
         float r_x = 0.725F;
-        float r_z = 2.45F;
-        float h = -6.275F;
-        float k = 2.05F;
+        float r_z = 2.00F;
+        float h = -6.15F;
+        float k = 2.0F;
         if (Math.Pow(x-h,2)/Math.Pow(r_x,2) + Math.Pow(z-k,2)/Math.Pow(r_z,2) <= 1.0 && y <= 5) {
             return true;
         } else {
