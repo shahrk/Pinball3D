@@ -93,7 +93,7 @@ public class PinballGame : MonoBehaviour
         }
 
 
-        if (((ball.activeSelf == false) && (ballsLeft == 0)))
+        if (((remaining <= 0) && (ballsLeft == 0)))
         {
             if (gameOver == false)
             {
@@ -121,8 +121,8 @@ public class PinballGame : MonoBehaviour
         ballsText.text = ballsLeft.ToString();
 
         // Check if our 'count' is equal to or exceeded 12
-        // if (winText.text == "BLACK HOLED")
-        //     return;
+        if (!isBlackholeActive)
+            return;
         if (score >= 900) winText.text = "You won!";
         else if (gameOver) winText.text = "Game Over";
         else if (score == 500) winText.text = "Superstar!";
@@ -163,15 +163,20 @@ public class PinballGame : MonoBehaviour
 
     System.Collections.IEnumerator waiter()
     {
-        Vector3 finalPos = new Vector3(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z);
+        Vector3 finalPos;
+        if (isWithinEllipse1(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z)) {
+            finalPos = new Vector3(6.05F, plunger.transform.position.y, 1.75F);
+        } else {
+            finalPos = new Vector3(-6.1F, plunger.transform.position.y, 2.15F);
+        }
         ball.SetActive(false);
         //Wait for 0.3 seconds
-        yield return new WaitForSeconds(0.4F);
+        yield return new WaitForSeconds(0.5F);
         // toggleBlackholeWithDelay();
         ball.SetActive(true);
         Rigidbody rb = ball.GetComponent<Rigidbody>();
-        Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f));
-        rb.AddForce(movement * plungerSpeed);
+        Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 0.0f));
+        rb.AddForce(movement * plungerSpeed/2);
         ball.transform.position = finalPos;
         isBlackholeActive = true;
     }
@@ -190,7 +195,7 @@ public class PinballGame : MonoBehaviour
         float r_x = 0.75F;
         float r_z = 2.2F;
         float h = 6.05F;
-        float k = 3.95F;
+        float k = 4.98F;
         if (Math.Pow(x-h,2)/Math.Pow(r_x,2) + Math.Pow(z-k,2)/Math.Pow(r_z,2) <= 1.0 && y <= 5) {
             return true;
         } else {

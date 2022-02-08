@@ -58,8 +58,8 @@ public class BumperController : MonoBehaviour {
                 this.gameObject.GetComponent<MeshRenderer>().enabled = false;
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;
 
-                GameObject.Find("Cylinder").GetComponent<MeshRenderer>().enabled = true;
-                GameObject.Find("Cylinder").transform.position = this.gameObject.transform.position;
+                // GameObject.Find("Cylinder").GetComponent<MeshRenderer>().enabled = true;
+                // GameObject.Find("Cylinder").transform.position = this.gameObject.transform.position;
 
             }
             //trigger hit light (change material assigned to bumper object, so bumper "lights up"), reset hitlight timer 
