@@ -147,7 +147,7 @@ public class PinballGame : MonoBehaviour
         // Check if our 'count' is equal to or exceeded 12
         if (!isBlackholeActive)
             return;
-        if (score >= 900) winText.text = "You won!";
+        if (gameWon()) winText.text = "You won!";
         else if (gameOver) winText.text = "Game Over";
         else if (!isSuperstar && score == 500) {
             winText.text = "Superstar!";
@@ -158,6 +158,15 @@ public class PinballGame : MonoBehaviour
 
         if (score > highscore) highscore = score;
         highScoreText.text = highscore.ToString();
+    }
+
+    bool gameWon() {
+        GameObject[] bumpers = GameObject.FindGameObjectsWithTag("Bumper");
+        foreach (GameObject bumper in bumpers) {
+            if (bumper.GetComponent<MeshRenderer>().enabled)
+                return false;
+        }
+        return true;
     }
 
     System.Collections.IEnumerator resetWinText() {
