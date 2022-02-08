@@ -28,11 +28,11 @@ public class PinballGame : MonoBehaviour
     public KeyCode newGameKey;
     public KeyCode plungerKey;
     public KeyCode puzzlecameraKey;
-
+    public float remaining;
+    public float bonus;
 
     private int ballsLeft = 3;
     private float allowed_time = 30;
-    float remaining;
     private bool gameOver = false;
     private GameObject ball;
     private GameObject plunger;
@@ -74,10 +74,13 @@ public class PinballGame : MonoBehaviour
         if (Input.GetKey(puzzlecameraKey) == true) switchCamera();
         //Turn on the timer
         if (ball.activeSelf == true) {
-            remaining =allowed_time - (Time.time - startTime);
+            // Debug.Log("This is Bonus Object")
+
+            remaining = allowed_time - (Time.time - startTime) + bonus;
             string mins = ((int)remaining/60).ToString();
-            string secs = (remaining%60).ToString("f1");
-            timerText.text = mins + ":" + secs;            
+            string secs = ((remaining)%60).ToString("f1");
+            timerText.text = mins + ":" + secs; 
+            bonus = 0;     
         }
         else {
             timerText.text = "00" + ":" + "00";            

@@ -4,6 +4,7 @@ using System.Collections;
 public class ClockController : MonoBehaviour {
 
     public  int scoreIncrement = 100;
+    public float timeIncrement = 5.0F;
     
     public AudioSource bumperSound;
     public Material bumperOff;
@@ -69,7 +70,9 @@ public class ClockController : MonoBehaviour {
             bumperSound.Play();
 
             //adds bumper score to the score talley being summed in the PinballGame script
-            GameObject.Find("Pinball Table").GetComponent<PinballGame>().score = GameObject.Find("Pinball Table").GetComponent<PinballGame>().score + scoreIncrement;
+            // GameObject.Find("Pinball Table").GetComponent<PinballGame>().score = GameObject.Find("Pinball Table").GetComponent<PinballGame>().score + scoreIncrement;
+            Debug.Log("Reached the point" + timeIncrement);
+            GameObject.Find("Pinball Table").GetComponent<PinballGame>().bonus = GameObject.Find("Pinball Table").GetComponent<PinballGame>().bonus + timeIncrement;
         }
     }
 }	
