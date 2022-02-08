@@ -167,7 +167,7 @@ public class PinballGame : MonoBehaviour
         if (isWithinEllipse1(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z)) {
             finalPos = new Vector3(6.05F, plunger.transform.position.y, 1.75F);
         } else {
-            finalPos = new Vector3(-6.1F, plunger.transform.position.y, 2.15F);
+            finalPos = new Vector3(-6.275F, plunger.transform.position.y, -0.4F);
         }
         ball.SetActive(false);
         //Wait for 0.3 seconds
@@ -204,10 +204,10 @@ public class PinballGame : MonoBehaviour
     }
 
     bool isWithinEllipse2(float x, float y, float z) {
-        float r_x = 0.69F;
-        float r_z = 2.3F;
-        float h = -6.1F;
-        float k = 4.45F;
+        float r_x = 0.725F;
+        float r_z = 2.45F;
+        float h = -6.275F;
+        float k = 2.05F;
         if (Math.Pow(x-h,2)/Math.Pow(r_x,2) + Math.Pow(z-k,2)/Math.Pow(r_z,2) <= 1.0 && y <= 5) {
             return true;
         } else {
