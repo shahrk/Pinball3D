@@ -43,6 +43,7 @@ public class PinballGame : MonoBehaviour
     private GameObject puzzleCamera;
     private float startTime;
     private GameObject[] clocks;
+    private GameObject[] roadblocks;
 
     private bool isBlackholeActive = true;
     public bool allow_once = true;
@@ -66,6 +67,12 @@ public class PinballGame : MonoBehaviour
         audioPlayer.clip = soundtrackClip;
         audioPlayer.volume = 0.3f;
         audioPlayer.Play(); 
+        clocks = GameObject.FindGameObjectsWithTag("Clock");
+        foreach (GameObject clock in clocks){
+            clock.GetComponent<MeshRenderer>().enabled = false;
+            clock.GetComponent<BoxCollider>().enabled = false;
+            clock.GetComponent<ClockController>().hitCount = 0;
+        }
     }
 
     private void Update()
@@ -196,11 +203,13 @@ public class PinballGame : MonoBehaviour
         } else {
             finalPos = new Vector3(-6.275F, plunger.transform.position.y, -0.4F);
         }
-        ball.SetActive(false);
+        // ball.SetActive(false);
+        ball.GetComponent<MeshRenderer>().enabled = false;
         //Wait for 0.3 seconds
         yield return new WaitForSeconds(0.5F);
         // toggleBlackholeWithDelay();
-        ball.SetActive(true);
+        // ball.SetActive(true);
+        ball.GetComponent<MeshRenderer>().enabled = true;
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 0.0f));
         rb.AddForce(movement * plungerSpeed/2);
@@ -254,6 +263,7 @@ public class PinballGame : MonoBehaviour
         GameObject[] bumpers;
         bumpers = GameObject.FindGameObjectsWithTag("Bumper");
         clocks = GameObject.FindGameObjectsWithTag("Clock");
+        roadblocks = GameObject.FindGameObjectsWithTag("Roadblock");
 
         foreach (GameObject bumper in bumpers)
         {
@@ -267,6 +277,13 @@ public class PinballGame : MonoBehaviour
             clock.GetComponent<BoxCollider>().enabled = false;
             clock.GetComponent<ClockController>().hitCount = 0;
         }
+
+        foreach (GameObject roadblock in roadblocks){
+            roadblock.GetComponent<MeshRenderer>().enabled = true;
+            roadblock.GetComponent<BoxCollider>().enabled = true;
+            roadblock.GetComponent<RoadblockController>().hitCount = 0;
+        }
+
         allow_once = true;
     }
 
