@@ -71,7 +71,6 @@ public class ClockController : MonoBehaviour {
 
             //adds bumper score to the score talley being summed in the PinballGame script
             // GameObject.Find("Pinball Table").GetComponent<PinballGame>().score = GameObject.Find("Pinball Table").GetComponent<PinballGame>().score + scoreIncrement;
-            Debug.Log("Reached the point" + timeIncrement);
             GameObject.Find("Pinball Table").GetComponent<PinballGame>().bonus = GameObject.Find("Pinball Table").GetComponent<PinballGame>().bonus + timeIncrement;
         }
     }

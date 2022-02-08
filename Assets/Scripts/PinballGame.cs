@@ -226,13 +226,21 @@ public class PinballGame : MonoBehaviour
         score = 0;
 
         GameObject[] bumpers;
+        GameObject[] clocks;
         bumpers = GameObject.FindGameObjectsWithTag("Bumper");
+        clocks = GameObject.FindGameObjectsWithTag("Clock");
 
         foreach (GameObject bumper in bumpers)
         {
             bumper.GetComponent<MeshRenderer>().enabled = true;
             bumper.GetComponent<BoxCollider>().enabled = true;
             bumper.GetComponent<BumperController>().hitCount = 0;
+        }
+
+        foreach (GameObject clock in clocks){
+            clock.GetComponent<MeshRenderer>().enabled = true;
+            clock.GetComponent<BoxCollider>().enabled = true;
+            clock.GetComponent<ClockController>().hitCount = 0;
         }
     }
 
