@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 // Include the namespace required to use Unity UI
 using UnityEngine.UI;
@@ -40,6 +41,8 @@ public class PinballGame : MonoBehaviour
     private GameObject maincam;
     private GameObject puzzleCamera;
     private float startTime;
+
+    private bool isBlackholeActive = true;
 
     // At the start of the game..
     void Start()
@@ -100,6 +103,7 @@ public class PinballGame : MonoBehaviour
         }
 
         SetText();
+        IsSuckedUp();
     }
 
     // Each physics step..
@@ -117,13 +121,93 @@ public class PinballGame : MonoBehaviour
         ballsText.text = ballsLeft.ToString();
 
         // Check if our 'count' is equal to or exceeded 12
-        if (gameOver) winText.text = "Game Over";
+        // if (winText.text == "BLACK HOLED")
+        //     return;
+        if (score >= 900) winText.text = "You won!";
+        else if (gameOver) winText.text = "Game Over";
         else if (score == 500) winText.text = "Superstar!";
-        else if (score >= 900) winText.text = "You won!";
         else winText.text = "";
 
         if (score > highscore) highscore = score;
         highScoreText.text = highscore.ToString();
+    }
+
+    void IsSuckedUp() {
+        if (isBlackholeActive && isWithinEllipse(ball.transform.position.x, ball.transform.position.y, ball.transform.position.z)) {
+            winText.text = "BLACK HOLED";
+            Vector3 initialPos = new Vector3(ball.transform.position.x, 0.0f, ball.transform.position.z);
+            Vector3 finalPos = new Vector3(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z);
+            ball.transform.position = initialPos;
+            // ball.SetActive(false);
+            isBlackholeActive = false;
+            StartCoroutine(waiter());
+            // ball.SetActive(true);
+            // Rigidbody rb = ball.GetComponent<Rigidbody>();
+            // Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f));
+            // rb.AddForce(movement * plungerSpeed);
+            // ball.transform.position = finalPos;
+        }
+        // ball.SetActive(true);
+        // Debug.Log("Setting active");
+        // Rigidbody rb = ball.GetComponent<Rigidbody>();
+        // Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
+        // rb.AddForce(movement * plungerSpeed);
+
+        // // set ball position to location of plunger
+        // ball.transform.position = plunger.transform.position;
+        // ballsLeft = ballsLeft - 1;
+
+        // audioPlayer.PlayOneShot(plungerClip);
+        // startTime = Time.time;
+    }
+
+    System.Collections.IEnumerator waiter()
+    {
+        Vector3 finalPos = new Vector3(ball.transform.position.x, plunger.transform.position.y, ball.transform.position.z);
+        ball.SetActive(false);
+        //Wait for 0.3 seconds
+        yield return new WaitForSeconds(0.4F);
+        // toggleBlackholeWithDelay();
+        ball.SetActive(true);
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        Vector3 movement = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f));
+        rb.AddForce(movement * plungerSpeed);
+        ball.transform.position = finalPos;
+        isBlackholeActive = true;
+    }
+
+    System.Collections.IEnumerator toggleBlackholeWithDelay()
+    {
+        yield return new WaitForSeconds(1);
+        isBlackholeActive = true;
+    }
+
+    bool isWithinEllipse(float x, float y, float z) {
+        return isWithinEllipse1(x,y,z) || isWithinEllipse2(x,y,z);
+    }
+
+    bool isWithinEllipse1(float x, float y, float z) {
+        float r_x = 0.75F;
+        float r_z = 2.2F;
+        float h = 6.05F;
+        float k = 3.95F;
+        if (Math.Pow(x-h,2)/Math.Pow(r_x,2) + Math.Pow(z-k,2)/Math.Pow(r_z,2) <= 1.0 && y <= 5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    bool isWithinEllipse2(float x, float y, float z) {
+        float r_x = 0.69F;
+        float r_z = 2.3F;
+        float h = -6.1F;
+        float k = 4.45F;
+        if (Math.Pow(x-h,2)/Math.Pow(r_x,2) + Math.Pow(z-k,2)/Math.Pow(r_z,2) <= 1.0 && y <= 5) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     void NewGame()
